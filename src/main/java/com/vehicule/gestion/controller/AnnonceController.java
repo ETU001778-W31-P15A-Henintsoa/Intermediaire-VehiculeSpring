@@ -91,10 +91,12 @@ public class AnnonceController {
     }
 
     @PostMapping("/suppressionAnnonce/{idannonce}")
-    public ResponseEntity request(@PathVariable("idannonce") String idAnnonce) {
+    public ResponseEntity supprimerAnnonce(@PathVariable("idannonce") String idAnnonce) {
         try {
             Annonce a = annonceService.findAllByIdAnnonce(idAnnonce).get(0);
-            return ResponseEntity.ok("Annone id:" + idAnnonce + " supprime.");
+            a.setEtat(-1);
+            annonceService.save(a);
+            return ResponseEntity.ok("Annone id:" + idAnno  nce + " supprime.");
         } catch (Exception e) {
             reponse = new ApiResponse(e.getMessage(), null);
             return ResponseEntity.status(500).body(e.getMessage());
