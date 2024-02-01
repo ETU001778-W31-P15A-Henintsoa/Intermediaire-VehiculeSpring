@@ -90,25 +90,16 @@ public class AnnonceController {
         }
     }
 
-    // @PostMapping("/rechercheAvance")
-    // public ResponseEntity request(@RequestParam(value = "marque", required =
-    // false) String marque,@RequestParam(value = "modele", required = false) String
-    // modele,@RequestParam(value = "categorie", required = false) String
-    // categorie,@RequestParam(value = "date1", required = false) String
-    // date1,@RequestParam(value = "date2", required = false) String
-    // date2,@RequestParam(value = "prix1", required = false) String
-    // prix1,@RequestParam(value = "prix2", required = false) String prix2){
-    // try{
-    // List<Annonce> annonce = annonceService.rechercheAvance(marque, modele,
-    // categorie, date1, date2, prix1, prix2);
-    // System.out.println("eto");
-    // reponse = new ApiResponse("", annonce);
-    // return ResponseEntity.ok(gson.toJson(reponse));
-    // } catch (Exception e) {
-    // reponse = new ApiResponse(e.getMessage(), null);
-    // return ResponseEntity.status(500).body(e.getMessage());
-    // }
-    // }
+    @PostMapping("/suppressionAnnonce/{idannonce}")
+    public ResponseEntity request(@PathVariable("idannonce") String idAnnonce) {
+        try {
+            Annonce a = annonceService.findAllByIdAnnonce(idAnnonce).get(0);
+            return ResponseEntity.ok("Annone id:" + idAnnonce + " supprime.");
+        } catch (Exception e) {
+            reponse = new ApiResponse(e.getMessage(), null);
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
 
     @PostMapping("/rechercheAvance")
     public ResponseEntity request(@RequestBody MappingRecherche mapping) {
