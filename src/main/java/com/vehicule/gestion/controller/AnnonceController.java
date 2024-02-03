@@ -96,7 +96,7 @@ public class AnnonceController {
             Annonce a = annonceService.findAllByIdAnnonce(idAnnonce).get(0);
             a.setEtat(-1);
             annonceService.save(a);
-            return ResponseEntity.ok("Annone id:" + idAnno  nce + " supprime.");
+            return ResponseEntity.ok("Annone id:" + idAnnonce + " supprime.");
         } catch (Exception e) {
             reponse = new ApiResponse(e.getMessage(), null);
             return ResponseEntity.status(500).body(e.getMessage());
