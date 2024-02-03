@@ -93,4 +93,17 @@ public class ControllerMarque {
         }
     }
 
+    @Transactional(rollbackOn = Exception.class)
+    @PostMapping("/marque/{id_marque}/{pays}")
+    public ResponseEntity<String> update(@PathVariable("id_marque") String id_marque,@PathVariable("pays") String pays) {
+        try {
+            servicemarque.updateMarque(pays,id_marque);
+            return ResponseEntity.ok("Marque id = " + id_marque + " update successfully.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            reponse = new ApiResponse(e.getMessage(), null);
+            return ResponseEntity.status(500).body(gson.toJson(reponse));
+        }
+    }
+
 }
