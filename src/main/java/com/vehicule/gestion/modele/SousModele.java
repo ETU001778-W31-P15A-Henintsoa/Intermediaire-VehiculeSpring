@@ -31,8 +31,8 @@ public class SousModele {
     @ManyToOne
     @JoinColumn(name = "idtypecarburant")
     TypeCarburant typeCarburant;
-    @Column(name="automatique")
-    boolean automatique;
+    @Column(name="estmanuel")
+    boolean estManuel;
     @Column(name="puissancemoteur")
     float puissanceMoteur;
     float batterie;
@@ -45,12 +45,12 @@ public class SousModele {
         this.batterie = batterie;
     }
 
-    public boolean isAutomatique() {
-        return automatique;
+    public boolean isEstManuel() {
+        return estManuel;
     }
 
-    public void setAutomatique(boolean estManuel) {
-        this.automatique = estManuel;
+    public void setEstManuel(boolean estManuel) {
+        this.estManuel = estManuel;
     }
 
     public float getConsommation() {
@@ -97,7 +97,7 @@ public class SousModele {
 
     public void setMax(float max) throws Exception{
         if(max<=0){
-            throw new Exception("entrer ube vitesse valide");
+            throw new Exception("entrer une vitesse valide");
         }
         this.vitesseMax = max;
     }   
