@@ -59,7 +59,8 @@ public class SecurityConfig {
               // for testing without security first
               .requestMatchers(HttpMethod.GET, "/marques/**").permitAll()
               // Annonce
-              .requestMatchers(HttpMethod.GET, "/annonce/**").permitAll()
+              // .requestMatchers(HttpMethod.GET, "/annonce/**").permitAll()
+              .requestMatchers("/annonce/**").permitAll()
               // --------------------------
               .requestMatchers(HttpMethod.GET, "/marque").permitAll()
               .requestMatchers(HttpMethod.GET, "/typecarburants").permitAll()
