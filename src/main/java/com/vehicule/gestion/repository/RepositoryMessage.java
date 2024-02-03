@@ -12,8 +12,8 @@ import com.vehicule.gestion.modele.Utilisateur;
 
 @Repository
 public interface RepositoryMessage extends MongoRepository<Message, String> {
-    @Query(value = "SELECT a FROM message WHERE (message.idutilidateurenvoyeur = :idutilisateur and message.idutilidateurenvoyeur= :idutilisateur2) ||  (message.idutilidateurenvoyeur = :idutilisateur2 and message.idutilidateurenvoyeur= :idutilisateur) order by datemessage")
-    List<Message> getMessage(@Param("idutilisateur") Utilisateur idUtilisateur,
-            @Param("idutilisateur2") Utilisateur idutilisateur2);
+    // @Query(value = "SELECT a FROM message WHERE (message.idutilidateurenvoyeur = :idutilisateur and message.idutilidateurenvoyeur= :idutilisateur2) ||  (message.idutilidateurenvoyeur = :idutilisateur2 and message.idutilidateurenvoyeur= :idutilisateur) order by datemessage")
+    // List<Message> getMessage(@Param("idutilisateur") Utilisateur idUtilisateur,
+    //         @Param("idutilisateur2") Utilisateur idutilisateur2);
 
 }
