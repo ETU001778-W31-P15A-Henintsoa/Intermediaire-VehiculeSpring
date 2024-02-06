@@ -20,6 +20,6 @@ public interface SousModeleRepository extends JpaRepository<SousModele, String> 
 
     
      @Modifying
-    @Query("update SousModele m set m.modele.id=:modele,m.nomSous=:nom,vitesseMax=:vitesse,consommation=:consommation,typeCarburant.id=:carburant,estManuel=:manuel,puissanceMoteur:moteur,batterie=;batterie where idSousModele=:idSousModele")
+    @Query("update SousModele m set m.modele.id=:modele,m.nomSous=:nom,vitesseMax=:vitesse,consommation=:consommation,typeCarburant.id=:carburant,estManuel=:manuel,puissanceMoteur=:moteur,batterie=:batterie where idSousModele=:idSousModele")
     void update(@Param(value = "idSousModele") String idSousModele,@Param(value = "modele") String modele,@Param(value = "nom") String nom,@Param(value = "vitesse") float vitesse,@Param(value = "consommation") float consommation,@Param(value = "carburant") String carburant,@Param(value = "manuel") boolean manuel,@Param(value = "moteur") float moteur,@Param(value = "batterie") float batterie);
 }

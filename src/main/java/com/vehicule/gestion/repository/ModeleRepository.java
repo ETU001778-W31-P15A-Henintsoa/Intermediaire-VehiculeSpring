@@ -19,6 +19,6 @@ public interface ModeleRepository extends JpaRepository<Modele, String> {
     List<Modele> findAllByNomModele(String nomModele);
 
      @Modifying
-    @Query("update modele m set m.marque.id=:marque,m.categorie=:categorie,nomModele=:nom where id=:idmodele")
+    @Query("update Modele m set m.marque.id=:marque,m.categorie=:categorie,nomModele=:nom where id=:idmodele")
     void update(@Param(value = "categorie") String categorie,@Param(value = "marque") String marque,@Param(value = "nom") String nom,@Param(value = "idmodele") String idmodele);
 }
