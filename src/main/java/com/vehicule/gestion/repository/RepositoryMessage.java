@@ -12,11 +12,17 @@ import com.vehicule.gestion.modele.Utilisateur;
 
 @Repository
 public interface RepositoryMessage extends MongoRepository<Message, String> {
-    @Query("{$or:[" +
-    "{$and:[{idUtilisateurEnvoyeur: :idUtilisateur}, {idUtilisateurDestinataire: :idUtilisateur2}]}, " +
-    "{$and:[{idUtilisateurEnvoyeur: :idUtilisateur2}, {idUtilisateurDestinataire: :idUtilisateur}]}" +
-    "]}," +
-    "sort:{dateMessage:1}")
-List<Message> getMessage(@Param("idUtilisateur") String idUtilisateur,
-                      @Param("idUtilisateur2") String idUtilisateur2);
+    // @Query("{$or:[" +
+    //         "{$and:[{idUtilisateurEnvoyeur: :idUtilisateur}, {idUtilisateurReceveur: :idUtilisateur2}]}, " +
+    //         "{$and:[{idUtilisateurEnvoyeur: :idUtilisateur2}, {idUtilisateurReceveur: :idUtilisateur}]}" +
+    //         "]}," +
+    //         "sort:{dateMessage:1}")
+    // List<Message> getMessage(@Param("idUtilisateur") Utilisateur idUtilisateur,
+    //         @Param("idUtilisateur2") Utilisateur idUtilisateur2);
+
+    @Query("{ $or: [ " +
+            "{ $and: [ { 'idUtilisateurEnvoyeur': ?0 }, { 'idUtilisateurReceveur': ?1 } ] }, " +
+            "{ $and: [ { 'idUtilisateurEnvoyeur': ?1 }, { 'idUtilisateurReceveur': ?0 } ] } ] }" +
+            "sort:{dateMessage:1}")
+    List<Message> findByUtilisateurs(Utilisateur idUtilisateurEnvoyeur, Utilisateur idUtilisateurDestinataire);
 }

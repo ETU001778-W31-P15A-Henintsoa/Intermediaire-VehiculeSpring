@@ -29,7 +29,9 @@ public class SousModeleService {
     }
 
     public void update(String id,String modele,String nom,float vitesse,float conso,String carbu,boolean manuel,float moteur,float batterie){
-         sousService.update(modele, modele, nom, vitesse, conso, carbu, manuel, moteur, batterie);
+        System.out.println("huhu"); 
+        sousService.update(modele, modele, nom, vitesse, conso, carbu, manuel, moteur, batterie);
+        System.out.println("huhu"); 
     }
     
 }

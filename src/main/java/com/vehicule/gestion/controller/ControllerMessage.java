@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -44,18 +46,23 @@ public class ControllerMessage {
             Utilisateur envoyeur = utilisateurService.findByMail(mailEnvoyeur).get();
             Utilisateur recepteur = utilisateurService.findById(receveur).get();
 
+            long currentTimeMillis = System.currentTimeMillis();
+
+            Utilisateur u = new Utilisateur();
+            u.setIdUtilisateur(envoyeur.getIdUtilisateur());
+            Utilisateur j = new Utilisateur();
+            j.setIdUtilisateur(recepteur.getIdUtilisateur());
+
             Message essaie = new Message();
-            essaie.setIdUtilisateurEnvoyeur(envoyeur);
-            essaie.setIdUtilisateurReceveur(recepteur);
-            essaie.setDateMessage(LocalDateTime.now());
+            essaie.setIdUtilisateurEnvoyeur(u);
+            essaie.setIdUtilisateurReceveur(j);
+            essaie.setDateMessage(new Timestamp(currentTimeMillis));
             essaie.setLiensImages(path);
             essaie.setMessage(message);
 
             servicemessage.save(essaie);
 
-            List<Message> lesmessages = servicemessage.findAll();
-
-            reponse = new ApiResponse("", lesmessages);
+            reponse = new ApiResponse("", "messages Envoye");
 
             return ResponseEntity.status(500).body(gson.toJson(reponse));
 
@@ -74,8 +81,13 @@ public class ControllerMessage {
             Utilisateur envoyeur = utilisateurService.findByMail(mailEnvoyeur).get();
             Utilisateur recepteur = utilisateurService.findById(receveur).get();
 
-            List<Message> lesmessages = servicemessage.getMessages(envoyeur.getIdUtilisateur(),
-                    recepteur.getIdUtilisateur());
+            Utilisateur u = new Utilisateur();
+            u.setIdUtilisateur(envoyeur.getIdUtilisateur());
+            Utilisateur j = new Utilisateur();
+            j.setIdUtilisateur(recepteur.getIdUtilisateur());
+
+            List<Message> lesmessages = servicemessage.getMessages(u,
+                    j);
 
             reponse = new ApiResponse("", lesmessages);
 

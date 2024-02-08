@@ -1,5 +1,8 @@
 package com.vehicule.gestion.modele;
 
+import java.util.Date;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -14,7 +17,7 @@ import lombok.Data;
 public class Message {
     @Id
     String idMessage;
-    LocalDateTime dateMessage;
+    Timestamp dateMessage;
     Utilisateur idUtilisateurEnvoyeur;
     Utilisateur idUtilisateurReceveur;
     String message;
@@ -40,13 +43,17 @@ public class Message {
         this.idMessage = idMessage;
     }
 
-    public LocalDateTime getDateMessage() {
+    public Timestamp getDateMessage() {
         return dateMessage;
     }
 
     public void setDateMessage(String dateMessage) throws Exception {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-        this.dateMessage = LocalDateTime.parse(dateMessage, formatter);
+        // DateTimeFormatter formatter =
+        // DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+        String pattern = "yyyy-MM-dd HH:mm:ss";
+        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+        Date date = sdf.parse(dateMessage);
+        this.dateMessage = new Timestamp(date.getTime());
     }
 
     public Utilisateur getIdUtilisateurEnvoyeur() {
@@ -109,7 +116,7 @@ public class Message {
 
     }
 
-    public void setDateMessage(LocalDateTime dateMessage) {
+    public void setDateMessage(Timestamp dateMessage) {
         this.dateMessage = dateMessage;
     }
 

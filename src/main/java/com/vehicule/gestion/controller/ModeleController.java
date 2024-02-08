@@ -77,7 +77,7 @@ public class ModeleController {
     }
 
     @Transactional
-    @PostMapping("/update")
+    @PostMapping("/modele/update")
     public ResponseEntity<String> update(@RequestBody MappingModele c) throws Exception {
         try {
             reponse = new ApiResponse("", null);

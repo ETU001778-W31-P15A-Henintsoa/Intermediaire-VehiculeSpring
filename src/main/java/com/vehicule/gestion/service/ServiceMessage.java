@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import com.vehicule.gestion.modele.Message;
 import com.vehicule.gestion.modele.Utilisateur;
+// import com.vehicule.gestion.modele.Utilisateur;
 import com.vehicule.gestion.repository.RepositoryMessage;
 
 @Service
@@ -31,8 +32,8 @@ public class ServiceMessage {
         repositoryMessage.deleteById(id);
     }
 
-    public List<Message> getMessages(String i, String j) {
-        return repositoryMessage.getMessage(i, j);
+    public List<Message> getMessages(Utilisateur i, Utilisateur j) {
+        return repositoryMessage.findByUtilisateurs(i, j);
     }
 
 }

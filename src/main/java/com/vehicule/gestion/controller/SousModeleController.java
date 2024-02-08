@@ -82,6 +82,7 @@ public class SousModeleController {
             entiteService.update(m.getId(), m.getModele(), m.getNom(), m.getVitesse(), m.getConso(), m.getCarbu(), m.isManuel(), m.getMoteur(), m.getBatterie());
             // if (c.isNomDuplacated(categorie) == false) {
             response = new ApiResponse("", null);
+            System.out.print("miditra ato:"+m.getId());
             return ResponseEntity.ok(gson.toJson(response));
         } catch (Exception e) {
             return ResponseEntity.status(500).body(e.getMessage());
