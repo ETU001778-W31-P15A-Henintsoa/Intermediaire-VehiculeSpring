@@ -12,13 +12,6 @@ import com.vehicule.gestion.modele.Utilisateur;
 
 @Repository
 public interface RepositoryMessage extends MongoRepository<Message, String> {
-    // @Query("{$or:[" +
-    //         "{$and:[{idUtilisateurEnvoyeur: :idUtilisateur}, {idUtilisateurReceveur: :idUtilisateur2}]}, " +
-    //         "{$and:[{idUtilisateurEnvoyeur: :idUtilisateur2}, {idUtilisateurReceveur: :idUtilisateur}]}" +
-    //         "]}," +
-    //         "sort:{dateMessage:1}")
-    // List<Message> getMessage(@Param("idUtilisateur") Utilisateur idUtilisateur,
-    //         @Param("idUtilisateur2") Utilisateur idUtilisateur2);
 
     @Query("{ $or: [ " +
             "{ $and: [ { 'idUtilisateurEnvoyeur': ?0 }, { 'idUtilisateurReceveur': ?1 } ] }, " +
