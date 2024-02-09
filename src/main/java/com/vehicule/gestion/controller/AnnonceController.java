@@ -1,6 +1,7 @@
 package com.vehicule.gestion.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,8 +22,10 @@ import com.vehicule.gestion.modele.Annonce;
 import com.vehicule.gestion.modele.ApiResponse;
 import com.vehicule.gestion.modele.MappingRecherche;
 import com.vehicule.gestion.modele.Marque;
+import com.vehicule.gestion.modele.SousModele;
 import com.vehicule.gestion.modele.Utilisateur;
 import com.vehicule.gestion.service.AnnonceService;
+import com.vehicule.gestion.service.SousModeleService;
 import com.vehicule.gestion.service.UtilisateurService;
 
 import jakarta.transaction.Transactional;
@@ -33,6 +37,8 @@ public class AnnonceController {
 
     @Autowired
     private AnnonceService annonceService;
+    @Autowired
+    private SousModeleService sousModeleService;
     private Gson gson = new Gson();
     private ApiResponse reponse;
     @Autowired
@@ -127,8 +133,20 @@ public class AnnonceController {
 
     @Transactional
     @PostMapping("/annonce")
-    public Annonce save(@RequestBody Annonce c) throws Exception {
-        return annonceService.save(c);
+    public Annonce save(@RequestBody Annonce annonce) throws Exception {
+        System.out.println(annonce.getSousModele().getIdSousModele() + " ok ");
+        SousModele sousModele = sousModeleService.findById(annonce.getSousModele().getIdSousModele())
+                .orElseThrow(() -> new Exception(
+                        "Le SousModele avec l'id " + annonce.getSousModele().getIdSousModele()
+                                + " n'a pas été trouvé."));
+        Utilisateur utilisateur = utilisateurService.findById(annonce.getUtilisateur().getIdUtilisateur())
+                .orElseThrow(() -> new Exception(
+                        "Le Utilisateur avec l'id " + annonce.getUtilisateur().getIdUtilisateur()
+                                + " n'a pas été trouvé."));
+
+        annonce.setSousModele(sousModele);
+        annonce.setUtilisateur(utilisateur);
+        return annonceService.save(annonce);
     }
 
     @Transactional
@@ -136,6 +154,18 @@ public class AnnonceController {
     public ResponseEntity<String> update(@PathVariable("idAnnonce") String idAnnonce) throws Exception {
         try {
             annonceService.update(idAnnonce, 3);
+            return ResponseEntity.ok("Annonce " + idAnnonce + " validee");
+        } catch (Exception e) {
+            reponse = new ApiResponse(e.getMessage(), null);
+            return ResponseEntity.status(500).body(gson.toJson(reponse));
+        }
+    }
+
+    @Transactional
+    @PutMapping("/annonceVendu/{idAnnonce}")
+    public ResponseEntity<String> updateVendu(@PathVariable("idAnnonce") String idAnnonce) throws Exception {
+        try {
+            annonceService.update(idAnnonce, 5);
             return ResponseEntity.ok("Annonce " + idAnnonce + " validee");
         } catch (Exception e) {
             reponse = new ApiResponse(e.getMessage(), null);
