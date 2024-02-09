@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -35,56 +37,67 @@ public class ControllerMessage {
     private ApiResponse reponse;
 
     // Insertion Message
-    // @PostMapping("message/{idreceveur}/{message}/{files}")
-    // public ResponseEntity<String> save(@PathVariable("idreceveur") String receveur,
-    //         @PathVariable("message") String message, @PathVariable("files") List<String> path) {
-    //     try {
-    //         String mailEnvoyeur = String.valueOf(SecurityContextHolder.getContext().getAuthentication().getName());
+    @PostMapping("message/{idreceveur}/{message}/{files}")
+    public ResponseEntity<String> save(@PathVariable("idreceveur") String receveur,
+            @PathVariable("message") String message, @PathVariable("files") List<String> path) {
+        try {
+            String mailEnvoyeur = String.valueOf(SecurityContextHolder.getContext().getAuthentication().getName());
 
-    //         Utilisateur envoyeur = utilisateurService.findByMail(mailEnvoyeur).get();
-    //         Utilisateur recepteur = utilisateurService.findById(receveur).get();
+            Utilisateur envoyeur = utilisateurService.findByMail(mailEnvoyeur).get();
+            Utilisateur recepteur = utilisateurService.findById(receveur).get();
 
-    //         Message essaie = new Message();
-    //         essaie.setIdUtilisateurEnvoyeur(envoyeur);
-    //         essaie.setIdUtilisateurReceveur(recepteur);
-    //         essaie.setDateMessage(LocalDateTime.now());
-    //         essaie.setLiensImages(path);
-    //         essaie.setMessage(message);
+            long currentTimeMillis = System.currentTimeMillis();
 
-    //         servicemessage.save(essaie);
+            Utilisateur u = new Utilisateur();
+            u.setIdUtilisateur(envoyeur.getIdUtilisateur());
+            Utilisateur j = new Utilisateur();
+            j.setIdUtilisateur(recepteur.getIdUtilisateur());
 
-    //         List<Message> lesmessages = servicemessage.findAll();
+            Message essaie = new Message();
+            essaie.setIdUtilisateurEnvoyeur(u);
+            essaie.setIdUtilisateurReceveur(j);
+            essaie.setDateMessage(new Timestamp(currentTimeMillis));
+            essaie.setLiensImages(path);
+            essaie.setMessage(message);
 
-    //         reponse = new ApiResponse("", lesmessages);
+            servicemessage.save(essaie);
 
-    //         return ResponseEntity.status(500).body(gson.toJson(reponse));
+            reponse = new ApiResponse("", "messages Envoye");
 
-    //     } catch (Exception e) {
-    //         e.printStackTrace();
-    //         reponse = new ApiResponse(e.getMessage(), null);
-    //         return ResponseEntity.status(500).body(gson.toJson(reponse));
-    //     }
-    //         }
+            return ResponseEntity.status(500).body(gson.toJson(reponse));
 
-    // @GetMapping("/greeting/{idj}")
-    // public ResponseEntity<String> greeting(@PathVariable("idj") String receveur) {
-    //     try {
-    //         String mailEnvoyeur = String.valueOf(SecurityContextHolder.getContext().getAuthentication().getName());
+        } catch (Exception e) {
+            e.printStackTrace();
+            reponse = new ApiResponse(e.getMessage(), null);
+            return ResponseEntity.status(500).body(gson.toJson(reponse));
+        }
+    }
 
-    //         Utilisateur envoyeur = utilisateurService.findByMail(mailEnvoyeur).get();
-    //         Utilisateur recepteur = utilisateurService.findById(receveur).get();
+    @GetMapping("/messages/{idj}")
+    public ResponseEntity<String> greeting(@PathVariable("idj") String receveur) {
+        try {
+            String mailEnvoyeur = String.valueOf(SecurityContextHolder.getContext().getAuthentication().getName());
 
-    //         List<Message> lesmessages = servicemessage.messages(envoyeur, recepteur);
+            Utilisateur envoyeur = utilisateurService.findByMail(mailEnvoyeur).get();
+            Utilisateur recepteur = utilisateurService.findById(receveur).get();
 
-    //         reponse = new ApiResponse("", lesmessages);
+            Utilisateur u = new Utilisateur();
+            u.setIdUtilisateur(envoyeur.getIdUtilisateur());
+            Utilisateur j = new Utilisateur();
+            j.setIdUtilisateur(recepteur.getIdUtilisateur());
 
-    //         return ResponseEntity.status(500).body(gson.toJson(reponse));
+            List<Message> lesmessages = servicemessage.getMessages(u,
+                    j);
 
-    //     } catch (Exception e) {
-    //         e.printStackTrace();
-    //         reponse = new ApiResponse(e.getMessage(), null);
-    //         return ResponseEntity.status(500).body(gson.toJson(reponse));
-    //     }
-    // }
+            reponse = new ApiResponse("", lesmessages);
+
+            return ResponseEntity.status(500).body(gson.toJson(reponse));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            reponse = new ApiResponse(e.getMessage(), null);
+            return ResponseEntity.status(500).body(gson.toJson(reponse));
+        }
+    }
 
 }

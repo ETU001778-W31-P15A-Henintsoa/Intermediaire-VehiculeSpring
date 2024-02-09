@@ -92,6 +92,7 @@ public class SousModeleController {
 
             // if (c.isNomDuplacated(categorie) == false) {
             response = new ApiResponse("", null);
+            System.out.print("miditra ato:"+m.getId());
             return ResponseEntity.ok(gson.toJson(response));
         } catch (Exception e) {
             return ResponseEntity.status(500).body(e.getMessage());
