@@ -16,8 +16,10 @@ insert into annonce values
 (default,'UTI1','SMOD1','grenat',2000000,1900000,'2024-02-25',3),
 (default,'UTI1','SMOD1','vert',3000000,2900000,'2024-02-25',5),
 (default,'UTI3','SMOD1','bleu',5000000,4900000,'2024-02-25',5),
-(default,'UTI4','SMOD1','rouge',10200000,1000000,'2024-02-25',5);
-(default,'UTI5','SMOD1','noir',2000000,1900000,'2024-02-25',5);
+(default,'UTI4','SMOD1','rouge',10200000,1000000,'2024-02-25',5),
+(default,'UTI5','SMOD1','noir',2000000,1900000,'2024-02-25',5),
+(default,'UTI2','SMOD1','noir',1500000,1400000,'2024-02-25',5);
+
 
 -- insert into vente values 
 -- (default,'2024-01-26','UTI1','ANN2','UTI2',2000000),

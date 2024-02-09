@@ -73,7 +73,7 @@ public class AnnonceController {
         try {
             String mailUtilisateur = String.valueOf(SecurityContextHolder.getContext().getAuthentication().getName());
             Utilisateur utilisateur = utilisateurService.findByMail(mailUtilisateur).get();
-            List<Annonce> annonce = annonceService.findByUtilisateurAndEtat(utilisateur.getIdUtilisateur(), 3);
+            List<Annonce> annonce = annonceService.findByUtilisateurAndEtat(utilisateur.getIdUtilisateur(), 5);
             reponse = new ApiResponse("", annonce);
             return ResponseEntity.ok(gson.toJson(reponse));
         } catch (Exception e) {
