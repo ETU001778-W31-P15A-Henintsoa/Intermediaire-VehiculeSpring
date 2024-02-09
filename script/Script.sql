@@ -158,3 +158,9 @@ create table Kitage(
     valeur float,
     compte serial
 );
+
+
+------------------------------------09-02-24--------------------------------------
+-- alter table marque add etat int;
+-- alter table Categorie add etat int;
+-- alter table modele add etat
