@@ -41,7 +41,7 @@ public class ControllerTypeCarburant {
         }
     }
 
-    @Transactional(rollbackOn = Exception.class)
+    @Transactional
     @PostMapping("/typecarburant")
     public ResponseEntity<String> save(@RequestBody TypeCarburant type) {
         try {
@@ -67,7 +67,7 @@ public class ControllerTypeCarburant {
         }
     }
 
-    @Transactional(rollbackOn = Exception.class)
+    @Transactional
     @PostMapping("/typecarburant/delete/{id}")
     public ResponseEntity<String> deleteById(@PathVariable("id") String id) {
         try {

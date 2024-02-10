@@ -48,7 +48,6 @@ alter table modele add nommodele varchar(30);
 create sequence seqSousModele;
 create table SousModele(
     idSousModele varchar(20) default concat('SMOD' || nextval('seqSousModele')) primary key,
-    nomSousModele varchar(50),
     idModele varchar(20) references Modele(idModele),
     vitesseMax float,
     Consommation float,
@@ -60,7 +59,7 @@ create table SousModele(
 );
 
 alter table sousmodele add estmanuel boolean;
-alter table sousmodele add nomsous boolean; 
+alter table sousmodele add nomsous varchar(50); 
 
 --alter table sousmodele add idmodele varchar(20), add constraint huhu foreign key(idmodele) references modele(idmodele);
 
@@ -118,7 +117,6 @@ create table Annonce(
 );
 
 alter table annonce add etat int;
-alter table annonce add nomsous varchar(30);
 
 
 -- ImageAnnonce(idImageAnnonce, idAnnonce [Annonce], nomimage)
@@ -195,7 +193,7 @@ create table historiqueInteret(
 );
 create sequence seqAnnonceFavoris;
 create table AnnonceFavoris(
-    idAnnonceFavoris varchar(20) default concat('ANF' || nextval('seqAnnonceFavoris')) 
+    idAnnonceFavoris varchar(20) default concat('ANF' || nextval('seqAnnonceFavoris')) ,
     idUtilisateur varchar(20) references Utilisateur(idUtilisateur),
     idAnnonce varchar(20) references Annonce(idAnnonce),
     etat int,

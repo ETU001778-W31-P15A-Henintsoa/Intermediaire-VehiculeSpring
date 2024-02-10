@@ -8,6 +8,7 @@
 /home/hp/Documents/GitHub/Intermediaire-VehiculeSpring/src/main/java/com/vehicule/gestion/modele/TypeCarburant.java
 /home/hp/Documents/GitHub/Intermediaire-VehiculeSpring/src/main/java/com/vehicule/gestion/controller/MeilleurMarqueVenduController.java
 /home/hp/Documents/GitHub/Intermediaire-VehiculeSpring/src/main/java/com/vehicule/gestion/modele/ApiResponse.java
+/home/hp/Documents/GitHub/Intermediaire-VehiculeSpring/src/main/java/com/vehicule/gestion/tools/MappingModele.java
 /home/hp/Documents/GitHub/Intermediaire-VehiculeSpring/src/main/java/com/vehicule/gestion/modele/MappingRecherche.java
 /home/hp/Documents/GitHub/Intermediaire-VehiculeSpring/src/main/java/com/vehicule/gestion/modele/Modele.java
 /home/hp/Documents/GitHub/Intermediaire-VehiculeSpring/src/main/java/com/vehicule/gestion/controller/CategorieController.java
@@ -63,6 +64,7 @@
 /home/hp/Documents/GitHub/Intermediaire-VehiculeSpring/src/main/java/com/vehicule/gestion/repository/ModeleRepository.java
 /home/hp/Documents/GitHub/Intermediaire-VehiculeSpring/src/main/java/com/vehicule/gestion/service/ModeleService.java
 /home/hp/Documents/GitHub/Intermediaire-VehiculeSpring/src/main/java/com/vehicule/gestion/controller/MeilleurVendeurController.java
+/home/hp/Documents/GitHub/Intermediaire-VehiculeSpring/src/main/java/com/vehicule/gestion/tools/MappingSousModeleUpdate.java
 /home/hp/Documents/GitHub/Intermediaire-VehiculeSpring/src/main/java/com/vehicule/gestion/controller/ImageAnnonceController.java
 /home/hp/Documents/GitHub/Intermediaire-VehiculeSpring/src/main/java/com/vehicule/gestion/repository/MeilleurMarqueVenduRepository.java
 /home/hp/Documents/GitHub/Intermediaire-VehiculeSpring/src/main/java/com/vehicule/gestion/repository/MeilleurVendeurRepository.java
